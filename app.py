@@ -18,7 +18,7 @@ def results():
     # build a request object
     req = request.get_json(force=True)
     #print(req)
-    if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1':
+    if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'old airport road - cardiology':
         api_response = requests.get('https://www.manipalhospitals.com/patient_api/index_get',auth = HTTPBasicAuth('manipal','M@AnipalDoc##2020'))
         api_response = json.loads(api_response.text)
         items = []
@@ -34,7 +34,7 @@ def results():
             my_dict['description'] = api_response[i]['DeptName']
             my_dict['image'] = image_dict
             items.append(my_dict)
-        print(items)
+      
         return  {'fulfillmentMessages': [
       {
         "platform": "ACTIONS_ON_GOOGLE",
