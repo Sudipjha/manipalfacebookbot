@@ -22,7 +22,7 @@ def results():
     if req['queryResult']['intent']['displayName'] == "english - book appointment - banaguluru":
         search_id = req['queryResult']['parameters']['Banguluruhospitals']
         api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-hospitals-speciality/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
-        speciality_response = json.loads(api_response)
+        speciality_response = json.loads(api_response.text)
         items = []
         for i in range(len(speciality_response)):
             my_dict = {}
