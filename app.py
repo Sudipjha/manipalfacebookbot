@@ -37,7 +37,7 @@ def results():
             "simpleResponses": {
               "simpleResponses": [
                 {
-                  "textToSpeech": "Select your specialties you are looking for:"
+                  "textToSpeech": "Select the specialty you are looking for:"
                 }
               ]
             }
