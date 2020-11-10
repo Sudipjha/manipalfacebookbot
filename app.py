@@ -19,8 +19,8 @@ def results():
     req = request.get_json(force=True)
     
     
-    if req['queryResult']['intent']['displayName'] == "english - book appointment - banaguluru":
-        search_id = req['queryResult']['parameters']['Banguluruhospitals']
+    if req['queryResult']['intent']['displayName'] == "english - book appointment - banaguluru" or "english - book appointment - otherhospitals":
+        search_id = req['queryResult']['parameters']['Banguluruhospitals']['otherhospitals']
         api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-hospitals-speciality/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
         speciality_response = json.loads(api_response.text)
         items = []
