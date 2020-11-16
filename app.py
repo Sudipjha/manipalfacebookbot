@@ -19,7 +19,7 @@ def results():
     req = request.get_json(force=True)
     
     
-    if req['queryResult']['intent']['displayName'] == "english - book appointment - banaguluru":
+    if req['queryResult']['intent']['displayName'] == 'english - book appointment - banaguluru':
         search_id = req['queryResult']['parameters']['Banguluruhospitals']
         api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-hospitals-speciality/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
         speciality_response = json.loads(api_response.text)
@@ -51,6 +51,37 @@ def results():
           }
         ]}
     
+    if req['queryResult']['intent']['displayName'] == 'english - book appointment - otherhospitals':
+        search_id = req['queryResult']['parameters']['otherhospitals']
+        api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-hospitals-speciality/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
+        speciality_response = json.loads(api_response.text)
+        items = []
+        for i in range(len(speciality_response)):
+            my_dict = {}
+            my_dict["info"] = {"key":speciality_response[i]['name']}
+            my_dict["title"] = speciality_response[i]['name']
+            my_dict["image"] = {}
+            items.append(my_dict)
+        return {
+        "fulfillmentMessages": [
+          {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "simpleResponses": {
+              "simpleResponses": [
+                {
+                  "textToSpeech": "Select the specialty you are looking for:"
+                }
+              ]
+            }
+          },
+          {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "listSelect": {
+              "title": "Centre Of Excellence",
+              "items": items
+            }
+          }
+      ]}
     
     #print(req)
     if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'old airport road - cardiology':
@@ -87,7 +118,7 @@ def results():
            "items":items
          }
        }
-    ]}
+     ]}
     
     
     # fetch action from json
