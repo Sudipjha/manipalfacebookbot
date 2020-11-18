@@ -85,7 +85,10 @@ def results():
     
     #print(req)
     if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'old airport road - cardiology':
-        api_response = requests.get('https://www.manipalhospitals.com/patient_api/index_get',auth = HTTPBasicAuth('manipal','M@AnipalDoc##2020'))
+        loc_id= req['queryResult']['parameters']['Banguluruhospitals']['otherhospitals']
+        search_id = req['queryResult']['parameters']['specialties']
+        api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-doctor-by-speciality/'+str(loc_id)+'/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
+#         api_response = requests.get('https://www.manipalhospitals.com/patient_api/index_get',auth = HTTPBasicAuth('manipal','M@AnipalDoc##2020'))
         api_response = json.loads(api_response.text)
         items = []
         for i in range(5):
