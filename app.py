@@ -84,11 +84,50 @@ def results():
       ]}
     
     #print(req)
-    if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'old airport road - cardiology':
+    if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'Doctor- Bengaluru locations':
         #loc_id= req['queryResult']['parameters']['Banguluruhospitals']['otherhospitals']
         
         search_id = req['queryResult']['parameters']['Specialties']
         api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-doctor-by-speciality/'+req['queryResult']['outputContexts'][0]['parameters']['Banguluruhospitals']+'/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
+#         api_response = requests.get('https://www.manipalhospitals.com/patient_api/index_get',auth = HTTPBasicAuth('manipal','M@AnipalDoc##2020'))
+        api_response = json.loads(api_response.text)
+        items = []
+        for i in range(10):
+            my_dict = {}
+            image_dict = {}
+            key = {}
+            key['key'] = api_response[i]['DoctorCode']
+            image_dict['imageUri'] = api_response[i]['photo']
+            image_dict['accessibilityText'] = api_response[i]['doc_name']
+            my_dict['info'] = key
+            my_dict['title'] = api_response[i]['doc_name']
+            my_dict['description'] = api_response[i]['DeptName']
+            my_dict['image'] = image_dict
+            items.append(my_dict)
+        
+        return  {'fulfillmentMessages': [
+      {
+        "platform": "ACTIONS_ON_GOOGLE",
+        "simpleResponses": {
+          "simpleResponses": [
+            {
+              "textToSpeech": "Here is the list of Doctors"
+            }
+          ]
+        }
+      },
+       {
+         "platform": "ACTIONS_ON_GOOGLE",
+         "carouselSelect": {
+           "items":items
+         }
+       }
+     ]}
+    if req['queryResult']['intent']['displayName'] == 'english - find doctors - specialties1' or 'otherhospitals - Doctors':
+        #loc_id= req['queryResult']['parameters']['Banguluruhospitals']['otherhospitals']
+        
+        search_id = req['queryResult']['parameters']['Specialties']
+        api_response = requests.get('https://test.manipalhospitals.com/chatbot-get-doctor-by-speciality/'+req['queryResult']['outputContexts'][0]['parameters']['otherhospitals']+'/'+str(search_id),auth = HTTPBasicAuth('manipalchatbotapi','manipalchatbotapi'))
 #         api_response = requests.get('https://www.manipalhospitals.com/patient_api/index_get',auth = HTTPBasicAuth('manipal','M@AnipalDoc##2020'))
         api_response = json.loads(api_response.text)
         items = []
