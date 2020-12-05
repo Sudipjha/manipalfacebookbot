@@ -29,18 +29,7 @@ def results():
                   "image_url":speciality_response[i]['photo'],
                   "title":speciality_response[i]['doc_name'],
                   "subtitle":speciality_response[i]['DeptName'],
-            "buttons":[
-                {
-                  "type":"show_block",
-                  "block_names":"Welcome Message",
-                  "title":"Book Appointment"
-                },
-                 {
-                  "type":"show_block",
-                  "block_names":"Welcome Message",
-                  "title":"View Profile"
-                 }
-              ]
+            
         }
         element.append(gallery)
     if len(element)>0:
