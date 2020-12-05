@@ -41,7 +41,7 @@ def results():
                    "url":"https://www.manipalhospitals.com/",
                    "title":"View Profile"
                 },
-            
+            ]
         }
         element.append(gallery)
     if len(element)>0:
