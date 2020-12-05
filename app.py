@@ -26,7 +26,7 @@ def results():
     element = []
     for i in range(10):
         gallery = {
-                  "image_url":speciality_response[i]['photo']
+                  "image_url":speciality_response[i]['photo'],
                   "title":speciality_response[i]['doc_name'],
                   "subtitle":speciality_response[i]['DeptName'],
         }
