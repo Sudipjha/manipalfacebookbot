@@ -38,7 +38,7 @@ def results():
                 {
                   "type":"web_url",
                    "webview_height_ratio": "tall",
-                   "url":"https://www.manipalhospitals.com/",
+                   "url":"https://www.manipalhospitals.com/?%20",
                    "title":"View Profile"
                 },
             ]
