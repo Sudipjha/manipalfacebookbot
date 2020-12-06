@@ -24,7 +24,7 @@ def results():
     count = min(len(speciality_response),10)
    
     element = []
-    for i in range(10):
+    for i in range(count):
         gallery = {
                   "image_url":speciality_response[i]['photo'],
                   "title":speciality_response[i]['doc_name'],
